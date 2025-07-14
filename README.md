@@ -243,3 +243,53 @@ Protected resources:
 
 Filter --> Servlet API are used for interceptor pattern, generally used for cross-cutting concerns like
 logging, security, profile, encrption, encoding,...
+
+Listeners: executed automatically when certain events happen within the Servlet Engine
+
+```
+ServletContext: Environment where serlvets are managed
+public class ContextInit implements ServletContextListener {
+    @Override
+    public void contextInitialized(ServletContextEvent sce) {
+        // this code is executed as soon as Servlet Context is created
+        Database Connection pool
+        User Thread pool
+    }
+
+    @Override
+    public void contextDestroyed(ServletContextEvent sce) {
+        // when servlet context is destroyed
+    }
+}
+
+public class UserInit implements HttpSessionListener {
+    // called whenever session is created or destroyed
+}
+```
+
+Web application development: Servlet, JSP , HTML , Filter and Listener
+
+SOLID Design Principle:
+S --> Single Responsibility
+O --> Open Close Principle [Closed for Change, but open for extension]
+L --> Liskov Substitution Principle: 
+    Generalization and Specialization relationship. A Specialization component can replace the Generalization and still get the work done what Generalization does.
+
+    BankingAccount is Generalization
+    SavingsAccount is Specialization
+    LoanAccount is Specialization
+    CurrentAccount is Specialization
+
+    If I am able to login and logout using BankingAccount, I should be able to perform these operarions using Savings, loan and Current account
+
+    If BankingAccount has credit() and debit(), this fails Liskov Substitution Principle
+I --> Interface seggregation
+D --> Dependency Injection using IoC Container
+Inversion of Control
+
+Web Container already uses DI.
+HttpServletRequest and HttpServletResponse objects are injected to Servlet and Filter
+
+UI --> Service ---> Repository / DAO --> Database connection
+
+
