@@ -203,3 +203,14 @@ mysql> select * from products;
 
 
 ``
+
+DriverManager.getConnection() factory method to establish a database connection
+Statement --> SQL which is fixed, no IN parameter
+PreparedStatement --> SQL which takes IN parameter
+select * from users where username = ? and password = ?
+select * from products where price > ?
+
+executeUpdate() -- INSERT , DELETE and UPDATE SQL
+executeQuery() -- SELECT
+
+JSP pages --> Static + dynamic content

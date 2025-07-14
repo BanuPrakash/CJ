@@ -15,6 +15,17 @@ import java.util.List;
 
 @WebServlet("/products")
 public class ProductServlet extends HttpServlet {
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Product product = Product.builder().
+                name(req.getParameter("name")).
+                price(Double.parseDouble(req.getParameter("price"))).
+                build();
+        ProductDao productDao = new ProductDaoJdbcImpl();
+        productDao.addProduct(product);
+        resp.sendRedirect("index.jsp?msg=Product Added!!!");
+    }
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

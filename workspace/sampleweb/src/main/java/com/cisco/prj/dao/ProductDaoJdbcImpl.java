@@ -22,7 +22,25 @@ public class ProductDaoJdbcImpl implements ProductDao{
 
     @Override
     public void addProduct(Product p) {
-
+        Connection con = null;
+        String SQL = "INSERT INTO products (id, name, price) VALUES (0, ?, ?)";
+        try {
+            con = DriverManager.getConnection(URL, USER, PWD);
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, p.getName());
+            ps.setDouble(2, p.getPrice());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            if(con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
 
     @Override
