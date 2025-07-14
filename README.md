@@ -113,6 +113,8 @@ web.xml -> one per web application
 		<url-pattern>/login</url-pattern>
 	</servlet-mapping>
 ```
+Annotation : @WebServlet("/login")
+
 
 Maven / Gradle are build tools:
 manage dependencies, execute goals like compile, testing, packaging,...
@@ -156,4 +158,11 @@ mvn package --> mvn compile
 
 embedded JETTY server / Tomcat Server
 mvn jetty:run --> mvn package --> mvn compile
+
+Web application ---> Servlet --> DAO --> JDBC --> Database
+
+HTTP Methods: GET / POST / PUT / PATCH / DELETE
+
+mvn jetty:run
+http://localhost:8080/sample
 
