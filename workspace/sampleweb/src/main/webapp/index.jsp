@@ -7,6 +7,10 @@
 <body>
   <h1>Product Application</h1>
   <div>
+      Welcome, ${sessionScope.user} &nbsp;&nbsp;&nbsp;
+      <a href="logout.do">Logout</a>
+  </div>
+  <div>
       ${param.msg}
   </div>
  <a href="/sample.do">Sample Servlet</a> <br />

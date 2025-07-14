@@ -13,6 +13,10 @@
 </head>
 <body>
   <h1>Product List Page</h1>
+  <div>
+      Welcome, ${sessionScope.user} &nbsp;&nbsp;&nbsp;
+      <a href="logout.do">Logout</a>
+  </div>
  <table border="1">
      <thead>
         <tr>
@@ -31,6 +35,6 @@
      </c:forEach>
      </tbody>
  </table>
- <a href="indx.jsp">Back</a>
+ <a href="index.jsp">Back</a>
 </body>
 </html>

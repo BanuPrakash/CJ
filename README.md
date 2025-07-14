@@ -227,3 +227,19 @@ ForntController redirects to list.jsp:
  req.getRequestDispatcher("list.jsp").forward(req, resp);
 
 Server Side Redirection can be used for multi stage processing
+
+
+===========
+
+Http protocol is a stateless protocol. Once response is committed HttpServletRequest and HttpServletResponse objects are destroyed. There is no conversational state of client.
+
+Session Tracking: Ability given to server side applications to keep track of conversational state of client.
+
+HttpSession API provides mechanism for session tracking
+
+===========
+
+Protected resources:
+
+Filter --> Servlet API are used for interceptor pattern, generally used for cross-cutting concerns like
+logging, security, profile, encrption, encoding,...

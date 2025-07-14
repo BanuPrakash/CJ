@@ -8,6 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -44,6 +45,16 @@ public class FrontController extends HttpServlet {
                  resp.sendRedirect("index.jsp?msg=Product Added!!!");
                  return;
              }
+        } else if(URI.endsWith("login.do")) {
+            // read email and password, authenticate
+            HttpSession session = req.getSession(); // create a session if not exist, if exists get the session
+            session.setMaxInactiveInterval(60*30);
+            session.setAttribute("user", req.getParameter("email"));
+            resp.sendRedirect("index.jsp");
+        } else if (URI.endsWith("logout.do")) {
+            HttpSession session = req.getSession(false); // get existing session
+            session.invalidate(); // destroy session object
+            resp.sendRedirect("login.jsp");
         }
     }
 
