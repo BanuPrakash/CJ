@@ -166,3 +166,38 @@ HTTP Methods: GET / POST / PUT / PATCH / DELETE
 mvn jetty:run
 http://localhost:8080/sample
 
+================================
+
+Docker is an open source software platform used to create, deploy and manage applications in virtualized environments called containers.
+
+Images --> Software
+https://hub.docker.com/
+
+======
+
+```
+
+mysql> create database cj;
+
+
+mysql> use cj;
+
+mysql> create table products (id int PRIMARY KEY AUTO_INCREMENT, name VARCHAR(100), price double);
+
+
+mysql> insert into products values (0, 'iPhone 16', 89000.00);
+
+
+mysql> insert into products values (0, 'Sony Bravia', 279000.00);
+
+
+mysql> select * from products;
++----+-------------+--------+
+| id | name        | price  |
++----+-------------+--------+
+|  1 | iPhone 16   |  89000 |
+|  2 | Sony Bravia | 279000 |
++----+-------------+--------+
+
+
+``
