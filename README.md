@@ -52,3 +52,108 @@ bash terminal> mysql -u "root" -p
 mysql> exit
 
 ```
+
+Agenda:
+
+Day 1: Web application development using Maven, RDBMS for CRUD operations
+
+Day 2, 3, and 4: Spring Boot 3.x with JPA for persistence
+
+Day 5: Spring Security and Introduction to MicroServices.
+
+==========================================
+
+Web Application Development:
+
+JSE --> Java Standard edition
+JEE --> Java Enterprise Edition
+* Web application development using Servlet API
+* Enterprise Java Bean [EJB] for distributed computing 
+* JNDI
+* ...
+
+Web application development:
+1) Server Side Rendering
+* Server sends the presentation pages for the data
+* Pros:
+Thin clients, SEO
+* Cons:
+Can't have heterogenous clients like Mobile/ Tv/ Desktop / Web
+* Heavy payload
+
+2) Client Side Rendering
+* send different formats of representation of data like JSON / XML / RSS / ATOM / CSV
+
+==============
+
+Servlet APIs provide a way to build Server side java applications.
+
+HttpServletRequest ans HttpServletResponse objects are created by the Servlet engine for every request.
+HttpServletRequest: encapsulates all data coming from client [ client specific data, Browser, OS]
+HttpServletResponse: used to write data back to client
+
+HttpServletRequest ans HttpServletResponse objects are attached to a Thread: ThreadLocal
+
+==============
+
+How does the engine know which Servlets to instantiate and map URL to servlet --> Deployment descriptor: XML or Annotation
+
+Life cycle management of Servlets are done by the Servlet engine/web container
+--> By default all Servlets are Singleton
+--> All Servlets are multi threaded
+
+web.xml -> one per web application
+```
+    <servlet>
+		<servlet-name>first</servlet-name>
+		<servlet-class>pkg.LoginServlet</servlet-class>
+	</servlet>
+    <servlet-mapping>
+		<servlet-name>first</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+```
+
+Maven / Gradle are build tools:
+manage dependencies, execute goals like compile, testing, packaging,...
+
+jakarta.servlet-api --> provides Servlet API
+HttpServlet, Servlet, HttpServletRequest, HttpServletReponse
+
+lombok --> code generation library
+
+mysql-connector-j --> Mysql Implementation class for integrating Java <---> Mysql
+
+---
+Packaging --> jar / war / ear / sar
+
+Web archive --> war --> understood by Servlet engine / Web container
+
+```
+    sampleweb
+        |
+        index.html
+        events.js
+        styles.css
+        |
+        WEB-INF
+            |
+            web.xml
+            |
+            classes
+            |
+                pkg
+                 |
+                 LoginServlet.class
+                 RegisterServlet.class
+```
+
+maven-compiler-plugin
+mvn compile
+
+maven-war-plugin
+mvn package --> mvn compile
+
+embedded JETTY server / Tomcat Server
+mvn jetty:run --> mvn package --> mvn compile
+
