@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/sample")
+//@WebServlet("/sample")
 public class SampleServlet extends HttpServlet {
 
     @Override

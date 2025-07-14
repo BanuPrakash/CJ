@@ -214,3 +214,16 @@ executeUpdate() -- INSERT , DELETE and UPDATE SQL
 executeQuery() -- SELECT
 
 JSP pages --> Static + dynamic content
+
+======================================================
+
+MVC Architectural Pattern
+Model --> Business data and business logic
+View --> Presentation layer [HTML, CSS , JS and JSP ]
+Controller --> Application Logic [ flow of application ] --> Servlet and Filter
+
+Server Side Redirection: One resource within the engine is redirecting to other resource with in the engine
+ForntController redirects to list.jsp:
+ req.getRequestDispatcher("list.jsp").forward(req, resp);
+
+Server Side Redirection can be used for multi stage processing

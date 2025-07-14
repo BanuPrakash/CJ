@@ -9,8 +9,8 @@
   <div>
       ${param.msg}
   </div>
- <a href="/sample">Sample Servlet</a> <br />
- <a href="/products">Get all products</a> <br />
+ <a href="/sample.do">Sample Servlet</a> <br />
+ <a href="/products.do">Get all products</a> <br />
  <a href="productForm.html">Add Product</a>
 </body>
 </html>
