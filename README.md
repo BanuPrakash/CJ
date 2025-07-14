@@ -176,6 +176,8 @@ https://hub.docker.com/
 ======
 
 ```
+% docker exec -it local-mysql bash
+bash-4.4# mysql -u root -p
 
 mysql> create database cj;
 
