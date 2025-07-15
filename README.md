@@ -311,6 +311,7 @@ client side forwarding : response.sendRedirect()
 server side forwarding: request.getRequestDispatcher("resource").forward(req, resp)
 
 HttpSession API: to track conversational state of the client
+
 ```
 
 Spring Framework: provides Spring Container to manage life cycle of beans and dependency injection.
@@ -510,6 +511,7 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao{
 ```
 
 Solution 2: using @Qualifier
+
 ```
 
 @Repository
@@ -526,7 +528,51 @@ public class AppService {
 
 ```
 
-Resume @ 11:15
 
+Solution 3: @Profile
+
+```
+
+@Repository
+@Profile("prod")
+public class EmployeeDaoMongoImpl implements EmployeeDao{
+
+@Repository
+@Profile("dev")
+public class EmployeeDaoJdbcImpl implements EmployeeDao{
+
+@Service
+public class AppService {
+    @Autowired
+    private EmployeeDao employeeDao;
+
+application.properties
+spring.profiles.active=dev
+
+```
+
+Solution 4: @ConditionalOnMissingBean
+
+```
+
+@Repository
+@ConditionalOnMissingBean(EmployeeDaoMongoImpl.class)
+public class EmployeeDaoJdbcImpl implements EmployeeDao{
+
+@Repository
+public class EmployeeDaoMongoImpl implements EmployeeDao{
+
+```
+
+==================
+
+Factory Methods:
+If 3rd party objects has to be managed by spring container, or object creation is complex then we need factory methods.
+
+DataSource --> Pool of database connection
+DriverManager --> to establish a single connection; latency involved in establishing connection and releasing.
+
+
+DataSource: C3p0, Hikari, DriverManagerDataSource , ....
 
 
