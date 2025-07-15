@@ -682,4 +682,13 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
 
 ```
 
+======
 
+CommandLineRunner is a Spring interface used to execute code after the Spring Boot application context has been loaded and before the application starts serving requests.
+
+Settings:
+build, Execution, deployment --> Annotation Processors
+orderapp--> Obtain processors from classpath
+
+
+update products set qty = 100 where 1 = 1;
