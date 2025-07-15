@@ -29,11 +29,11 @@ public class Order {
     @ManyToOne
     @JoinColumn(name="customer_fk") // FOREIGN KEY
     private Customer customer;
-
     // order has many items
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="order_fk")
     private List<LineItem> items = new ArrayList<>();
+
 
     private double total;
 }

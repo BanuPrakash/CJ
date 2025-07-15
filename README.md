@@ -708,3 +708,44 @@ https://martinfowler.com/bliki/BoundedContext.html
 
 @JoinColumn used with @ManyToOne introduces FK in owning entity
 @JoinColumn used with @OneToMany introduces FK in child entity 
+
+https://www.database-answers.com/data_models/
+
+
+```
+Assume 1 order has 4 items
+ @OneToMany
+    @JoinColumn(name="order_fk")
+    private List<LineItem> items = new ArrayList<>();
+
+to save: 
+orderRepo.save(order);
+itemRepo.save(i1);
+itemRepo.save(i2);
+itemRepo.save(i3);
+itemRepo.save(i4);
+
+to delete:
+orderRepo.delete(order);
+itemRepo.delete(i1);
+itemRepo.delete(i2);
+itemRepo.delete(i3);
+itemRepo.delete(i4);
+
+```
+
+With Cascade:
+
+```
+   // order has many items
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="order_fk")
+    private List<LineItem> items = new ArrayList<>();
+
+Order has 10 items
+to Save:
+orderRepo.save(order); // takes care of saving all 10 line items
+
+to delete:
+orderRepo.delete(order); // takes care of delete all 10 line items of order
+```
