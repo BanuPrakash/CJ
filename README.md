@@ -411,6 +411,9 @@ Wiring can be done using @Autowired or using constructors
         }
     }
 
+```
+
+```
 
 ApplicationContext ctx = new AnnotationConfigApplicationContext();
 ctx.scan("com.cisco.prj");
