@@ -292,4 +292,187 @@ HttpServletRequest and HttpServletResponse objects are injected to Servlet and F
 
 UI --> Service ---> Repository / DAO --> Database connection
 
+=============
+
+Day 1 Recap:
+```
+Web application development wrt to Java 
+Servlet API: Servlet, JSP, Filter and Listeners are termed as web components of JEE
+Servlet Container / Web Container / Servlet engine --> JETTY / TOMCAT and NETTY 
+
+Servlet Container manages life cycle of Servlet APIs like instantiating Servlets, HttpServletRequest and HttpServletResponse.
+Also DI of request and response objects are handled by Servlet Container
+
+Servlet/ Filter --> Controller
+JSP/HTML, CSS and JS --> View
+Java Bean [business data and logic] --> Model
+
+client side forwarding : response.sendRedirect()
+server side forwarding: request.getRequestDispatcher("resource").forward(req, resp)
+
+HttpSession API: to track conversational state of the client
+```
+
+Spring Framework: provides Spring Container to manage life cycle of beans and dependency injection.
+Bean --> any object managed by spring framework is a bean.
+
+Why Spring Framework?
+1) application can be built using loosely coupled objects 
+2) Reduces a lot of boiler plate code.
+3) provides many templates for Enterprise Application dev.
+4) Declarative style of programming instead of programmitic
+
+Spring framework uses XML / annotation as metadata for  manage life cycle and DI.
+
+```
+    interface EmployeeDao {
+        void addEmployee(Employee e);
+    }
+
+    public class EmployeeDaoJdbcImpl implements EmployeeDao {
+        public void addEmployee(Employee e) {
+            ..
+        }
+    }
+
+     public class EmployeeDaoMongoDbImpl implements EmployeeDao {
+        public void addEmployee(Employee e) {
+            ..
+        }
+    }
+
+    public class AppService {
+        private EmployeeDao empDao;
+
+        public void setEmpDao(EmployeeDao edao) {
+            this.empDao = edao;
+        }
+
+        public void doTask(Employee e) {
+            empDao.addEmployee(e);
+        }
+    }
+```
+
+beans.xml
+
+```
+    <beans>
+        <bean id="mongo" class="pkg.EmployeeDaoMongoDbImpl" />
+        <bean id="jdbc" class="pkg.EmployeeDaoJdbcImpl" />
+        <bean id="service" class="pkg.AppService">
+            <property name="empDao" ref="jdbc" />
+        </bean>
+    </beans>
+
+ApplicationContext ctx = new ClassPathXmlApplicationContext("beans.xml");
+
+AppService ser = ctx.getBean("service", AppService.class);
+
+ser.doTask(new Employee(...));
+
+```
+
+==============
+
+Annotations as meta-data:
+Spring is going to instantiate objects if it finds any of the below annotations:
+1) @Component
+2) @Repository
+3) @Service
+4) @Controller
+5) @RestController
+6) @Configuration
+7) @ControllerAdvice
+
+Wiring can be done using @Autowired or using constructors
+
+```
+  interface EmployeeDao {
+        void addEmployee(Employee e);
+    }
+
+    @Repository
+    public class EmployeeDaoJdbcImpl implements EmployeeDao {
+        public void addEmployee(Employee e) {
+            ..
+        }
+    }
+
+    @Service
+    public class AppService {
+        @Autowired
+        private EmployeeDao empDao;
+
+        public void doTask(Employee e) {
+            empDao.addEmployee(e);
+        }
+    }
+
+
+ApplicationContext ctx = new AnnotationConfigApplicationContext();
+ctx.scan("com.cisco.prj");
+ctx.refresh();
+
+AppService ser = ctx.getBean("service", AppService.class);
+
+ser.doTask(new Employee(...));
+
+    @Service
+    public class AppService {
+        // Constructor DI
+        public AppService(EmployeeDao empDao) {
+            this.empDao = empDao;
+        }
+    }
+
+
+```
+
+Advantage of using @Repository --> ErrorCode to proper exceptions
+
+https://github.com/spring-projects/spring-framework/blob/main/spring-jdbc/src/main/resources/org/springframework/jdbc/support/sql-error-codes.xml
+
+Without Spring and @Repository
+```
+    // Oracle
+    try {
+
+
+    } catch(SQLException ex) {
+        if(ex.getErrorCode() == 1) {
+            throw new DuplicateKeyException("...");
+        }
+    }
+    // MySQL
+    try {
+
+
+    } catch(SQLException ex) {
+        if(ex.getErrorCode() == 1062) {
+            throw new DuplicateKeyException("...");
+        }
+    }
+```
+Spring Boot framework is built on top of Spring Framework
+Spring boot 2.x is built on Spring Framework 5.x
+Spring boot 3.x is built on top of Spring Framework 6.x
+
+Why Spring Boot?
+Highly opiniated framework, lots of configurations comes out of the box.
+Example:
+* While building JDBC based applications, database connection pool is configured  out of the box.
+* While building Web applications 
+1) Embedded Tomcat container is configured out of the box.
+2) FrontController is configured and ready to use
+3) Provides Java <--> JSON conversion HttpMessageConverter
+* many more ...
+* Easy to Dockerize
+
+====
+
+@SpringBootApplication is 3 in one:
+1) @ComponentScan
+2) @EnableAutoConfiguration
+3) @Configuration
 
