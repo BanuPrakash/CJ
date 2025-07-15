@@ -649,3 +649,21 @@ Dependencies:
 2) JPA
 3) Lombok
 
+1) spring.jpa.hibernate.ddl-auto=update
+
+Map to existing table.
+If required alter table
+If table doesn't exist create a table
+
+Can be used for Top to bottom apprach
+
+2) spring.jpa.hibernate.ddl-auto=create
+create tables when application starts, delete them them on application terminate.
+Good for testing environment
+
+3) spring.jpa.hibernate.ddl-auto=verify
+Map to existing tables in database. Exact matching has to be there.
+No alter or creation of new tables.
+DBA controls the Database.
+Used for Bottom to Top approach.
+
