@@ -476,3 +476,56 @@ Example:
 2) @EnableAutoConfiguration
 3) @Configuration
 
+
+Problem:
+```
+Field employeeDao in com.cisco.springdemo.service.AppService 
+    required a single bean, but 2 were found:
+	- employeeDaoJdbcImpl: 	
+    - employeeDaoMongoImpl:
+
+```
+
+Solution 1: Using @Primary
+Mark one of the eligible ones as @Primary
+```
+@Repository
+@Primary
+public class EmployeeDaoMongoImpl implements EmployeeDao{
+@Repository
+public class EmployeeDaoJdbcImpl implements EmployeeDao{
+
+```
+
+Solution 2: using @Qualifier
+```
+@Repository
+public class EmployeeDaoMongoImpl implements EmployeeDao{
+@Repository
+public class EmployeeDaoJdbcImpl implements EmployeeDao{   
+
+
+@Service
+public class AppService {
+    @Autowired
+    @Qualifier("employeeDaoMongoImpl")
+    private EmployeeDao employeeDao;
+
+```
+
+
+@Service
+public class AdminService {
+    @Autowired
+    @Qualifier("employeeDaoMongoImpl")
+    private EmployeeDao employeeDao;
+
+@Service
+public class CustomerService {
+    @Autowired
+    @Qualifier("employeeDaoJdbcImpl")
+    private EmployeeDao employeeDao;
+
+
+customerService
+

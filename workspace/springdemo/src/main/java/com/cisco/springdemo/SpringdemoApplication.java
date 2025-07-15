@@ -14,11 +14,11 @@ public class SpringdemoApplication {
         AppService service = ctx.getBean("appService", AppService.class);
         service.doTask();
 
-        System.out.println("******");
-        String[] names = ctx.getBeanDefinitionNames();
-        for(String name: names) {
-            System.out.println(name);
-        }
+//        System.out.println("******");
+//        String[] names = ctx.getBeanDefinitionNames();
+//        for(String name: names) {
+//            System.out.println(name);
+//        }
     }
 
 }
