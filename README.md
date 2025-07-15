@@ -352,11 +352,13 @@ Spring framework uses XML / annotation as metadata for  manage life cycle and DI
             empDao.addEmployee(e);
         }
     }
+
 ```
 
 beans.xml
 
 ```
+
     <beans>
         <bean id="mongo" class="pkg.EmployeeDaoMongoDbImpl" />
         <bean id="jdbc" class="pkg.EmployeeDaoJdbcImpl" />
@@ -434,6 +436,7 @@ Advantage of using @Repository --> ErrorCode to proper exceptions
 https://github.com/spring-projects/spring-framework/blob/main/spring-jdbc/src/main/resources/org/springframework/jdbc/support/sql-error-codes.xml
 
 Without Spring and @Repository
+
 ```
     // Oracle
     try {
@@ -453,7 +456,9 @@ Without Spring and @Repository
             throw new DuplicateKeyException("...");
         }
     }
+
 ```
+
 Spring Boot framework is built on top of Spring Framework
 Spring boot 2.x is built on Spring Framework 5.x
 Spring boot 3.x is built on top of Spring Framework 6.x
@@ -478,7 +483,9 @@ Example:
 
 
 Problem:
+
 ```
+
 Field employeeDao in com.cisco.springdemo.service.AppService 
     required a single bean, but 2 were found:
 	- employeeDaoJdbcImpl: 	
@@ -488,7 +495,9 @@ Field employeeDao in com.cisco.springdemo.service.AppService
 
 Solution 1: Using @Primary
 Mark one of the eligible ones as @Primary
+
 ```
+
 @Repository
 @Primary
 public class EmployeeDaoMongoImpl implements EmployeeDao{
@@ -499,6 +508,7 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao{
 
 Solution 2: using @Qualifier
 ```
+
 @Repository
 public class EmployeeDaoMongoImpl implements EmployeeDao{
 @Repository
@@ -513,19 +523,7 @@ public class AppService {
 
 ```
 
-
-@Service
-public class AdminService {
-    @Autowired
-    @Qualifier("employeeDaoMongoImpl")
-    private EmployeeDao employeeDao;
-
-@Service
-public class CustomerService {
-    @Autowired
-    @Qualifier("employeeDaoJdbcImpl")
-    private EmployeeDao employeeDao;
+Resume @ 11:15
 
 
-customerService
 
