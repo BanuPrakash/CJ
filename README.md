@@ -697,3 +697,14 @@ orderapp--> Obtain processors from classpath
 default for built-in JpaRepository methods it's enabled --> Auto commit is set to true.
 
 
+Association Mapping: entities are associated
+* One-to-many
+* many-to-one
+* one-to-one
+* many-to-many
+
+Domain Driven Design
+https://martinfowler.com/bliki/BoundedContext.html
+
+@JoinColumn used with @ManyToOne introduces FK in owning entity
+@JoinColumn used with @OneToMany introduces FK in child entity 
