@@ -667,3 +667,16 @@ No alter or creation of new tables.
 DBA controls the Database.
 Used for Bottom to Top approach.
 
+with Spring Data JPA we just need interfaces, implementation class [@Repository] are generated:
+
+```
+
+public interface CustomerRepo extends JpaRepository<Customer, String> {
+}
+
+public interface ProductRepo extends JpaRepository<Product, Integer> {
+}
+
+
+```
+
