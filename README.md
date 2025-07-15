@@ -671,6 +671,8 @@ with Spring Data JPA we just need interfaces, implementation class [@Repository]
 
 ```
 
+```
+
 public interface CustomerRepo extends JpaRepository<Customer, String> {
 }
 
@@ -679,4 +681,5 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
 
 
 ```
+
 
