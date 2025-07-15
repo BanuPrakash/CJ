@@ -18,8 +18,8 @@ public class CustomerClient implements CommandLineRunner {
     // run() method is invoked as soon as Spring container /Context is created and initialized
     @Override
     public void run(String... args) throws Exception {
-        addCustomers();
-        printCustomers();
+//        addCustomers();
+//        printCustomers();
     }
 
     private void printCustomers() {

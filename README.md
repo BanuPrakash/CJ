@@ -691,4 +691,9 @@ build, Execution, deployment --> Annotation Processors
 orderapp--> Obtain processors from classpath
 
 
-update products set qty = 100 where 1 = 1;
+==========
+
+@Transactional is required for any custom mutation to the database table like insert, delete or update
+default for built-in JpaRepository methods it's enabled --> Auto commit is set to true.
+
+
