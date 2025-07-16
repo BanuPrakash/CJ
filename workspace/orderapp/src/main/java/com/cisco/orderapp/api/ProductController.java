@@ -36,4 +36,25 @@ public class ProductController {
     public Product addProduct(@RequestBody Product p) {
         return service.addProduct(p);
     }
+
+    // PATCH http://localhost:8080/api/products/1?price=75000.90
+    @PatchMapping("/{pid}")
+    public Product updateProductPrice(@PathVariable("pid") int id, @RequestParam("price") double price) {
+        return service.updateProductPrice(id, price);
+    }
+
+    // PUT http://localhost:8080/api/products/1?price=75000.90
+    // Accept:application/json
+    // content-type: application/json
+    /*
+        {
+            "name": "some",
+            "price": 78111.33
+        }
+     */
+
+    @PutMapping("/{pid}")
+    public Product modifyProduct(@PathVariable("pid") int id, @RequestBody Product p) {
+        return null;
+    }
 }
