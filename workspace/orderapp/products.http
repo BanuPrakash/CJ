@@ -1,0 +1,14 @@
+### @name="Get all products"
+GET  http://localhost:8080/api/products
+Accept: application/json
+
+### @name="add a new product"
+POST http://localhost:8080/api/products
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Wacom",
+  "price": 5400.00,
+  "quantity": 100
+}

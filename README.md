@@ -864,8 +864,73 @@ Dependencies:
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+    This Modules provides:
+    1) Embedded Tomcat Servlet Container
+    alternatives: Jetty and Netty
+    2) Jackson library for Java <---> JSON
+    alternatives: GSON, Jettison and Moxy
+    3) DispatcherServlet as FrontController Servlet
+    4) HandlerMapping
 ```
 
 Settings:
 build, Execution, deployment --> Annotation Processors
 orderapp--> Obtain processors from classpath
+
+Use @Controller for Traditional web application develeopment --> Server Side rendering
+use @RestController for RESTful WS --> Client side rendering
+
+URI to identify the resource and HTTP methods to perform CRUD operations
+
+1) GET http://localhost:8080/api/products
+Accept: application/json
+
+get all products
+
+2) GET http://localhost:8080/api/products/4
+get product whose id is 4 --> Path Parameter ( / )
+
+3) GET http://localhost:8080/api/products?page=1&size=10
+paginated products / sub set --> QueryParameters (?)
+
+4) POST http://localhost:8080/api/products
+Accept: application/json
+Content-type : application/json
+
+payload contains the new product to be added to products resource
+
+5) PUT http://localhost:8080/api/products/3
+For major update
+payload contains the new product information to be update  to a product whose id is 3 
+
+6)  PATCH http://localhost:8080/api/products/3
+for partial update
+payload contains the partial product information to be update  to a product whose id is 3 
+
+7) DELETE http://localhost:8080/api/products/3
+delete a product whose id is 3 / AVOID DELETE operation as API
+
+GET and DELETE -> No Payload --> Safe methods --> IDEMPOTENET
+PUT / PATCH and POST --> contains payload --> Not Safe methods
+
+```
+    @RestController
+    @RequestMapping("api/products")
+    public class ProductController {
+        @GetMapping()
+        public List<Product> getProducts() {
+            return service.getProducts();
+        }
+
+        @PostMapping
+        public @ResponseBody Product addProduct(@RequestBody Product p) {
+            return service.addProduct(p);
+        }
+    }
+
+@ResponseBody is optional
+
+```
+
+
+
