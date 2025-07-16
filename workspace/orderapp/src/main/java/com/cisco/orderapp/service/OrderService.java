@@ -1,6 +1,7 @@
 package com.cisco.orderapp.service;
 
 import com.cisco.orderapp.aop.Tx;
+import com.cisco.orderapp.api.EntityNotFoundException;
 import com.cisco.orderapp.dao.CustomerRepo;
 import com.cisco.orderapp.dao.OrderRepo;
 import com.cisco.orderapp.dao.ProductRepo;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -65,7 +67,7 @@ public class OrderService {
 
 
     @Transactional
-    public Product updateProductPrice(int id, double price) {
+    public Product updateProductPrice(int id, double price) throws EntityNotFoundException {
         productRepo.updateProduct(id, price);
         return  getProductById(id);
     }
@@ -75,8 +77,12 @@ public class OrderService {
         return productRepo.findAll();
     }
 
-    public Product getProductById(int id) {
-        return  productRepo.findById(id).get();
+    public Product getProductById(int id) throws EntityNotFoundException {
+        Optional<Product> opt = productRepo.findById(id);
+        if(opt.isPresent()) {
+            return opt.get();
+        }
+        throw  new EntityNotFoundException("Product with id : " + id + " doesn't exist!!!");
     }
 
     public Product addProduct(Product p) {

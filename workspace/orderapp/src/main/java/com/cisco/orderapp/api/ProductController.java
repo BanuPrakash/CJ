@@ -27,7 +27,7 @@ public class ProductController {
     }
 
     @GetMapping("/{pid}")
-    public Product getProductById(@PathVariable("pid") int id) {
+    public Product getProductById(@PathVariable("pid") int id) throws EntityNotFoundException {
         return  service.getProductById(id);
     }
 
@@ -39,7 +39,7 @@ public class ProductController {
 
     // PATCH http://localhost:8080/api/products/1?price=75000.90
     @PatchMapping("/{pid}")
-    public Product updateProductPrice(@PathVariable("pid") int id, @RequestParam("price") double price) {
+    public Product updateProductPrice(@PathVariable("pid") int id, @RequestParam("price") double price) throws EntityNotFoundException {
         return service.updateProductPrice(id, price);
     }
 

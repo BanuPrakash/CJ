@@ -1019,4 +1019,6 @@ The code that is executed at a join point. There are different types of advice, 
 
 
 
+@ControllerAdvice : meant to handle exceptions propagated from @Controller and @RestController --> It is a special @AfterThrowing advice. It is HttpServletRequest and HttpServletREsponse aware
+
 

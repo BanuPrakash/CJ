@@ -1,5 +1,6 @@
 package com.cisco.orderapp.client;
 
+import com.cisco.orderapp.api.EntityNotFoundException;
 import com.cisco.orderapp.entity.Product;
 import com.cisco.orderapp.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ public class ProductClient implements CommandLineRunner {
      //   updateProduct();
     }
 
-    private void updateProduct() {
+    private void updateProduct() throws EntityNotFoundException {
         Product product = service.updateProductPrice(3, 1255.00);
         System.out.println(product);
     }
