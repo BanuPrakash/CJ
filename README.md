@@ -952,7 +952,7 @@ The specification (RFC 6902) defines a set of operations (add, remove, replace, 
     }
     JsonPatch
     https://zuplo.com/blog/2024/10/10/unlocking-the-power-of-json-patch
-    
+
     [
         {"op": "replace", "path": "/title", "value" : "Team Lead"},
         {"op": "remove", "path": "/personal/phone"},
@@ -975,5 +975,48 @@ READ --- GET
 UPDATE -- PATCH / PUT / JSONPATCH 
 DELETE -- DELETE
 ==========================
+
+Cross Cutting Concerns
+Cross-cutting concerns are functionalities that are needed in multiple parts of an application, but don't directly contribute to the core business logic.
+-- Logging, Transaction, security , profile 
+
+Cross cutting concerns leads to code tangling and code scattering
+
+```
+    public void transferFunds(Account from, Account to, double amt) {
+        log.info("Transfer funds called!!!");
+        if(ctx.getPriciple() != null) { / /security
+            tx.beginTransaction();
+                double amt = from.getBalance();
+                log.info("Current balance : " + amt);
+                from.withdraw(amt);
+                to.deposit(amt);
+                log.info("transfered money!!!);
+            tx.commit();
+        }
+     }
+
+```
+
+https://docs.spring.io/spring-framework/reference/core/aop/ataspectj/pointcuts.html
+
+Aspect Oriented Programming
+Aspect-Oriented Programming (AOP) is a programming paradigm that enhances modularity by separating cross-cutting concerns, which are functionalities that affect multiple parts of a program
+Aspect:
+A module that encapsulates cross-cutting concerns, such as logging, security, or transaction management. 
+Join Point:
+A specific point in the execution of a program where an aspect can be applied. Examples include method calls or exception 
+handling. 
+m1, m2, m3, m4 and EntityFoundException
+
+Pointcut:
+An expression that defines which join points an aspect should be applied to. 
+m2 and EntityFoundException
+
+
+Advice:
+The code that is executed at a join point. There are different types of advice, such as before, after, around, afterthrowing, etc. 
+
+
 
 

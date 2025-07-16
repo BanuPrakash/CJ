@@ -1,5 +1,6 @@
 package com.cisco.orderapp.service;
 
+import com.cisco.orderapp.aop.Tx;
 import com.cisco.orderapp.dao.CustomerRepo;
 import com.cisco.orderapp.dao.OrderRepo;
 import com.cisco.orderapp.dao.ProductRepo;
@@ -62,12 +63,14 @@ public class OrderService {
         return productRepo.byRange(low, high);
     }
 
+
     @Transactional
     public Product updateProductPrice(int id, double price) {
         productRepo.updateProduct(id, price);
         return  getProductById(id);
     }
 
+    @Tx
     public List<Product> getProducts() {
         return productRepo.findAll();
     }
