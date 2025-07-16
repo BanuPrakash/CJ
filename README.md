@@ -932,5 +932,31 @@ PUT / PATCH and POST --> contains payload --> Not Safe methods
 
 ```
 
+JSON Patch is a standard format for describing changes to a JSON document. It's typically used with the HTTP PATCH method to apply partial updates to resources on a web server. 
 
+The specification (RFC 6902) defines a set of operations (add, remove, replace, move, copy, test) that can be applied to a JSON document. 
+
+```
+    Employee
+    {
+        id: 125,
+        title: "Jr Developer",
+        "personal": 
+            {
+                "phone": "123444"
+            },
+            "programmingSkills": [
+                "Java",
+                "JavaScript"
+            ]
+    }
+    [
+        {"op": "replace", "path": "/title", "value" : "Team Lead"},
+        {"op": "remove", "path": "/personal/phone"},
+        {"op": "add", "path": "/personal/email", "value":"smitha@cisco.com"},
+        {"op": "add", "path" : "/programmingSkils/1" , "value": "AWS"}
+
+    ]
+
+```
 
