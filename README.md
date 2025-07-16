@@ -950,6 +950,9 @@ The specification (RFC 6902) defines a set of operations (add, remove, replace, 
                 "JavaScript"
             ]
     }
+    JsonPatch
+    https://zuplo.com/blog/2024/10/10/unlocking-the-power-of-json-patch
+    
     [
         {"op": "replace", "path": "/title", "value" : "Team Lead"},
         {"op": "remove", "path": "/personal/phone"},
@@ -959,4 +962,18 @@ The specification (RFC 6902) defines a set of operations (add, remove, replace, 
     ]
 
 ```
+Task:
+
+CustomerController to add a customer and get all customers
+customers.http to test
+
+GET, POST, PUT , PATCH, DELETE
+
+CRUD
+CREATE -- POST
+READ --- GET
+UPDATE -- PATCH / PUT / JSONPATCH 
+DELETE -- DELETE
+==========================
+
 
