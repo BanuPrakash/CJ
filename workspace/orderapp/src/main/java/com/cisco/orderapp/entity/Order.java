@@ -29,6 +29,7 @@ public class Order {
     @ManyToOne
     @JoinColumn(name="customer_fk") // FOREIGN KEY
     private Customer customer;
+
     // order has many items
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="order_fk")

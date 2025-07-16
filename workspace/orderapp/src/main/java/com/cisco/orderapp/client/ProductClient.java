@@ -20,7 +20,7 @@ public class ProductClient implements CommandLineRunner {
 //        printProducts();
 //        addProduct();
 //        printByRange();
-        updateProduct();
+     //   updateProduct();
     }
 
     private void updateProduct() {

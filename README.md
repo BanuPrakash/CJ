@@ -749,3 +749,44 @@ orderRepo.save(order); // takes care of saving all 10 line items
 to delete:
 orderRepo.delete(order); // takes care of delete all 10 line items of order
 ```
+Complete orderRepo
+Build RESTful Web services for order application
+
+Client sends ORder in XML or JSON format:
+
+```
+    order date is system date
+    total has to be computed
+    amount of line item has to be computed
+    {
+        "customer": {"email": "anne@cisco.com"},
+        "items": [
+            {
+                "product": {"id": 3},
+                "qty" : 2
+            },
+            {
+                "product": {"id": 1},
+                "qty" : 3
+            },
+        ]
+    }
+
+    <order>
+        <customer>
+                <email>anne@cisco.com</email>
+        </customer>
+        <items>
+            <line-item>
+                    <product id="3">
+                    <qty>
+                            2
+                    </qty>
+            </line-item>
+        </items>
+    </order>
+
+```
+
+Dirty checking: within @Transactional boundary if entity becomes dirty / change, automatically ORM will send UPDATE SQL
+
