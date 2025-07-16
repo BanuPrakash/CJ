@@ -799,3 +799,73 @@ Example: Fetching Order has fetched Customer also but not it's line items
     private List<LineItem> items = new ArrayList<>();
 
 ====
+
+Building RESTful Web services.
+
+REST REpresentational State Transfer, architectural style for distributed systems.
+Roy Fielding in 2000.
+
+Prior to REST - SOAP was used
+SOAP APIs have several disadvantages, including complexity, performance overhead, and lack of flexibility compared to REST APIs.
+
+```
+<soap:Envelope
+xmlns:soap="http://www.w3.org/2003/05/soap-envelope"
+soap:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
+
+<soap:Header>
+...
+</soap:Header>
+
+<soap:Body>
+...
+  <soap:Fault>
+  ...
+  </soap:Fault>
+</soap:Body>
+
+</soap:Envelope>
+
+```
+
+* Resource: Any information that we can name and present on server is a resource
+* Representation: state of the resource at a given point of time
+    * data --> printer is On
+    * metadata --> data is 2kb and in JSON format
+    * hypermedia --> URIs to switch on / off / print the printer
+* Content Negotiation: different formats of Representation requested by the client
+
+Guiding principles of REST:
+1) Uniform Interface:
+    /users/123 identifies an user resource with id 123
+
+2) client server decoupling.
+
+3) Stateless: No session tracking , no converstational state of client
+
+4) Cacheable
+
+5) Layered System
+
+
+Spring Boot application with JPA and Web:
+Dependencies:
+1) MySQL
+2) JPA
+3) Lombok
+4) web
+
+====================
+
+```
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+```
+
+Settings:
+build, Execution, deployment --> Annotation Processors
+orderapp--> Obtain processors from classpath
