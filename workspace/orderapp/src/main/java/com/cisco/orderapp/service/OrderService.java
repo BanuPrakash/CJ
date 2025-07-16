@@ -21,6 +21,10 @@ public class OrderService {
     private final ProductRepo productRepo;
     private final CustomerRepo customerRepo;
     private final OrderRepo orderRepo;
+
+    public List<Order> getOrders() {
+        return  orderRepo.findAll();
+    }
     /*
     {
         "customer": {"email": "anne@cisco.com"},

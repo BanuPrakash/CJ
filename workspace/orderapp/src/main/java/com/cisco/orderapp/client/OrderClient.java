@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class OrderClient implements CommandLineRunner {
@@ -16,8 +18,21 @@ public class OrderClient implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        newOrder();
+//        newOrder();
+         printOrders();
     }
+
+    private void printOrders() {
+        List<Order> orders = service.getOrders();
+        for(Order order : orders) {
+            System.out.println(order.getCustomer().getFirstName() + " , " + order.getOrderDate() + " , " + order.getTotal() );
+            List<LineItem> items = order.getItems();
+            for(LineItem item : items) {
+                System.out.println(item.getProduct().getName() + ", " + item.getQty() + ", " + item.getAmount());
+            }
+        }
+    }
+
     /*
     {
         "customer": {"email": "anne@cisco.com"},

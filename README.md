@@ -790,3 +790,12 @@ Client sends ORder in XML or JSON format:
 
 Dirty checking: within @Transactional boundary if entity becomes dirty / change, automatically ORM will send UPDATE SQL
 
+By default ManyToOne is EAGER fetched and OneToMany is Lazy loading
+
+Example: Fetching Order has fetched Customer also but not it's line items
+
+@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name="order_fk")
+    private List<LineItem> items = new ArrayList<>();
+
+====
