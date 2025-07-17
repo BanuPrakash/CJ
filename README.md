@@ -1234,3 +1234,53 @@ npx redis-commander
 
 ```
 
+The Richardson Maturity Model (RMM)
+https://martinfowler.com/articles/richardsonMaturityModel.html
+
+```
+Level 0: The Swamp of POX (Plain Old XML/JSON):
+At this level, the API uses HTTP as a transport mechanism but doesn't leverage its features effectively. It often resembles a Remote Procedure Call (RPC) style with a single endpoint and payload-dependent actions. Essentially, it's using HTTP like a basic transport protocol without taking advantage of its capabilities. 
+
+
+Level 1: Resources:
+APIs at this level start to identify and expose individual resources via URIs. For example, instead of a single endpoint for all operations, you might have /customers, /products, etc. While this is a step towards REST, it doesn't fully utilize HTTP methods. 
+Level 2: HTTP Verbs:
+This level utilizes HTTP methods (GET, POST, PUT, DELETE) to define actions on resources. For example, a GET request to /customers/123 would retrieve customer information, while a POST request to the same URI could create a new customer. This level leverages the semantics of HTTP methods to interact with resources. 
+Level 3: HATEOAS (Hypermedia as the Engine of Application State):
+This is the highest level of maturity in the RMM. APIs at this level not only expose resources and use HTTP methods correctly but also provide hypermedia links (e.g., in JSON responses) that guide the client on how to navigate and interact with the API. The client can discover available actions and transitions based on the links in the response, making the API more discoverable and decoupled. 
+
+```
+
+Level 3 - Hypermedia Controls
+HATEOAS (Hypertext As The Engine Of Application State)
+Level 3 introduces discoverability, providing a way of making a protocol more self-documenting.
+
+WebMvcLinkBuilder is provided by Spring Framework to manually add links to the payload.
+
+
+```
+ <!-- HATEOAS -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
+        </dependency>
+
+        RepresentationModel
+            --> collectionModel
+            --> EntityModel
+        public class EntityModel<T>
+extends RepresentationModel<EntityModel<T>>
+
+EnityModel is Entity + Links
+
+https://www.iana.org/assignments/link-relations/link-relations.xhtml
+
+Affordances in HAL-FORMS are essentially instructions on how to interact with a resource. They detail the available HTTP methods (e.g., POST, PUT, DELETE), the expected content types for requests and responses, and any necessary parameters. 
+
+
+@EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL_FORMS)
+
+
+```
+
+

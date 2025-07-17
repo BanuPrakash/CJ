@@ -14,9 +14,14 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.afford;
 
 import java.util.List;
 
@@ -61,6 +66,19 @@ public class ProductController {
         return ResponseEntity.ok().eTag(String.valueOf(product.hashCode())).body(product);
     }
 
+    @GetMapping("/hateoas/{pid}")
+    public ResponseEntity<EntityModel<Product>> getProductByHateosId(@PathVariable("pid") int id) throws EntityNotFoundException {
+        Product p =  service.getProductById(id);
+        EntityModel<Product> em = EntityModel.of(p,
+                linkTo(methodOn(ProductController.class).getProductByHateosId((id))).withSelfRel()
+                        .andAffordance(afford(methodOn(ProductController.class).updateProductPrice(id, 0)))
+                        .andAffordance(afford(methodOn(ProductController.class).modifyProduct(id, null)))
+                ,
+                linkTo(methodOn(ProductController.class).getProducts(0,0)).withRel("products")
+                );
+
+        return  ResponseEntity.ok(em);
+    }
 
     // SPeL
     @Cacheable(value="productCache", key="#id")
