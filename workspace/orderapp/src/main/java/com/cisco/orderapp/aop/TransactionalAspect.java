@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class TransactionalAspect {
     Logger logger = LoggerFactory.getLogger(TransactionalAspect.class);
+
     @Around("@annotation(Tx)")
     public Object doTransaction(ProceedingJoinPoint pjp) throws Throwable {
         Object ret = null;

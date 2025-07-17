@@ -1001,6 +1001,8 @@ Cross cutting concerns leads to code tangling and code scattering
 https://docs.spring.io/spring-framework/reference/core/aop/ataspectj/pointcuts.html
 
 Aspect Oriented Programming
+```
+
 Aspect-Oriented Programming (AOP) is a programming paradigm that enhances modularity by separating cross-cutting concerns, which are functionalities that affect multiple parts of a program
 Aspect:
 A module that encapsulates cross-cutting concerns, such as logging, security, or transaction management. 
@@ -1020,5 +1022,46 @@ The code that is executed at a join point. There are different types of advice, 
 
 
 @ControllerAdvice : meant to handle exceptions propagated from @Controller and @RestController --> It is a special @AfterThrowing advice. It is HttpServletRequest and HttpServletREsponse aware
+
+```
+
+Jackson Dataformat XML for Java <--> XML
+
+Validation: Payload has to be validated
+
+```
+    <!-- Validation -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+    
+Settings:
+build, Execution, deployment --> Annotation Processors
+orderapp--> Obtain processors from classpath
+
+ @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED) // 201
+    public Product addProduct(@RequestBody @Valid Product p) {
+        return service.addProduct(p);
+    }
+
+https://jakarta.ee/specifications/bean-validation/3.0/apidocs/jakarta/validation/constraints/package-summary
+
+
+MethodArgumentNotValidException: addProduct(Product) with 3 errors: 
+
+[Field error in object 'product' on field 'name': rejected value []; codes [NotBlank.product.name,NotBlank.name,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [product.name,name]; arguments []; default message [name]]; default message [Name is required]] 
+
+[Field error in object 'product' on field 'price': rejected value [-5400.0]; codes [Min.product.price,Min.price,Min.double,Min]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [product.price,price]; arguments []; default message [price],10]; default message [Price -5400.0 should be more than 10]] 
+
+[Field error in object 'product' on field 'quantity': rejected value [0]; codes [Min.product.quantity,Min.quantity,Min.int,Min]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [product.quantity,quantity]; arguments []; default message [quantity],1]; default message [Quantity 0 should be more than 1]] ]
+
+BindingResult is an interface in Spring Framework used to hold the results of binding and validation when binding request parameters to an object (e.g., a form or DTO). It provides methods to check for validation errors and retrieve error details.
+
+When you use @Valid or @Validated annotations to validate request data, BindingResult acts as a container for validation errors and gives you fine-grained control over how to handle them in your controller.
+```
+
+
 
 
