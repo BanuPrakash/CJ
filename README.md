@@ -1219,5 +1219,18 @@ ConcurrentMapCache is available by default
 
 https://spring.io/blog/2020/11/10/new-in-spring-5-3-improved-cron-expressions
 
+Redis  is an in-memory key–value database, used as a distributed cache 
+
+     <!-- Redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+docker run --name some-redis -p 6379:6379  -d redis
+
+REdis Client: works on NodeJS
+npx redis-commander
+
 ```
 
