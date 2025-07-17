@@ -1256,7 +1256,8 @@ HATEOAS (Hypertext As The Engine Of Application State)
 Level 3 introduces discoverability, providing a way of making a protocol more self-documenting.
 
 WebMvcLinkBuilder is provided by Spring Framework to manually add links to the payload.
-
+linkTo()
+affordance()
 
 ```
  <!-- HATEOAS -->
@@ -1282,5 +1283,28 @@ Affordances in HAL-FORMS are essentially instructions on how to interact with a 
 
 
 ```
+
+Spring Data REST umbrella module: is built on top of Spring Data JPA and spring web module
+
+Using this module endpoints are created by spring data REST using the RESPository interfaces, no need for any @RestController
+
+Spring Data REST uses HATEOAS.
+
+Project:
+lombok
+jpa
+rest repositories
+mysql
+
+Add Entity and repo interfaces.
+Based on entities / plural names of entities becomes the endpoints
+http://localhost:8080/products/
+
+Any custom methods in JpaRepository comes as search
+http://localhost:8080/products/search/findByPriceGreaterThan?price=100000
+
+http://localhost:8080/customers/
+
+No @RestController instead use @BasePathAwareController
 
 
