@@ -28,4 +28,7 @@ public class Product {
     @Min(value = 1, message = "Quantity ${validatedValue} should be more than {value}")
     @Column(name="qty")
     private int quantity;
+
+    @Version
+    private int version;
 }

@@ -4,15 +4,11 @@ Accept: text/plain
 Content-Type: application/json
 
 {
-  "customer": {"email": "anne@cisco.com"},
+  "customer": {"email": "raj@cisco.com"},
   "items": [
     {
-      "product": {"id": 4},
-      "qty" : 1
-    },
-    {
       "product": {"id": 1},
-      "qty" : 2
+      "qty" : 3
     }
   ]
 }

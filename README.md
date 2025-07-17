@@ -1149,3 +1149,47 @@ Caching
 * ORM level caching
     -org.hibernate.cache.SwarmCache
     -EhCache [https://www.ehcache.org/documentation/3.10/examples.html]
+
+
+=====
+
+  @Version
+    private int version;
+
+ORM frmaeworks automatically updates the version each time mutation happens on entity using ORM
+```
++----+----------------+---------+------+---------+
+| id | name           | price   | qty  | version |
++----+----------------+---------+------+---------+
+|  1 | iPhone 16      | 75000.9 |   95 |       0 |
+
+We can use @Version for Etag and Caching
+We can use this for handling data corruption in concurrency
+
+First Commit wins
+User 1:
+    Product p = productRepo.getProductById(1);
+    +----+----------------+---------+------+---------+
+    | id | name           | price   | qty  | version |
+    +----+----------------+---------+------+---------+
+    |  1 | iPhone 16      | 75000.9 |   95 |       3 |
+
+    User 1 purchases 2 iPhone 16
+
+    update products set qty = qty - 2, version = version + 1 where id = 1 and version = 3
+User 2:
+    Product p = productRepo.getProductById(1);
+     +----+----------------+---------+------+---------+
+    | id | name           | price   | qty  | version |
+    +----+----------------+---------+------+---------+
+    |  1 | iPhone 16      | 75000.9 |   95 |       3 |
+
+    User 2 purchases 3 iPhone 16
+
+    update products set qty = qty - 3, version = version + 1 where id = 1 and version = 3
+
+Last commit gets StaleStateException, last user has to refresh / reload then do tx once again
+```
+
+Resume @ 11:15
+
