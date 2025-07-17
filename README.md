@@ -1063,5 +1063,89 @@ When you use @Valid or @Validated annotations to validate request data, BindingR
 ```
 
 
+API Documentation: RAML or OpenAPI / Swagger
+
+RAML, which stands for RESTful API Modeling Language
+
+```
+/books:
+  /{bookTitle}
+    get:
+      description: Retrieve a specific book title
+      queryParameters:
+        author:
+          displayName: Author
+          type: string
+          description: An author's full name
+          example: Mary Roach
+          required: false
+        publicationYear:
+          displayName: Pub Year
+          type: number
+          description: The year released for the first time in the US
+          example: 1984
+          required: false
+        rating:
+          displayName: Rating
+          type: number
+          description: Average rating (1-5) submitted by users
+          example: 3.14
+          required: false
+        isbn:
+          displayName: ISBN
+          type: string
+          minLength: 10
+          example: 0321736079
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "data": {
+                    "id": "SbBGk",
+                    "title": "Stiff: The Curious Lives of Human Cadavers",
+                    "description": null,
+                    "datetime": 1341533193,
+                    "genre": "science",
+                    "author": "Mary Roach",
+                    "link": "http://e-bookmobile.com/books/Stiff"
+                  },
+                  "success": true,
+                  "status": 200
+                }
+    put:
+      queryParameters:
+        access_token:
+          displayName: Access Token
+          type: string
+          description: Token giving you permission to make call
+          required: true
+
+```
 
 
+Open API :
+```
+ <!-- OpenAPI -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.8.9</version>
+        </dependency>
+
+http://localhost:8080/v3/api-docs
+
+http://localhost:8080/swagger-ui
+
+
+```
+
+Caching
+* Client side caching
+    - Cache-Control: max-age=3600
+    - ETag 
+* Web Server caching / RESTful WS
+* ORM level caching
+    -org.hibernate.cache.SwarmCache
+    -EhCache [https://www.ehcache.org/documentation/3.10/examples.html]

@@ -2,6 +2,7 @@ package com.cisco.orderapp.api;
 
 import com.cisco.orderapp.entity.Product;
 import com.cisco.orderapp.service.OrderService;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -10,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,6 +50,14 @@ public class ProductController {
         return  service.getProductById(id);
     }
 
+
+    @GetMapping("/etag/{pid}")
+    public ResponseEntity<Product> getProductByIdCache(@PathVariable("pid") int id) throws EntityNotFoundException {
+        Product product =  service.getProductById(id);
+        return ResponseEntity.ok().eTag(String.valueOf(product.hashCode())).body(product);
+    }
+
+
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED) // 201
     public Product addProduct(@RequestBody @Valid Product p) {
@@ -70,6 +80,7 @@ public class ProductController {
         }
      */
 
+    @Hidden
     @PutMapping("/{pid}")
     public Product modifyProduct(@PathVariable("pid") int id, @RequestBody Product p) {
         return null;

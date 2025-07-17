@@ -4,7 +4,7 @@ Accept: application/json
 
 
 ### @name="Get products by id"
-GET  http://localhost:8080/api/products/356
+GET  http://localhost:8080/api/products/3
 Accept: application/json
 
 
@@ -42,3 +42,11 @@ Content-Type: application/json
 PATCH http://localhost:8080/api/products/1?price=75000.90
 Accept: application/json
 
+### @name="Get Product by ETag"
+GET http://localhost:8080/api/products/etag/2
+Accept: application/json
+
+### @name="Get Product by ETag Cached"
+GET http://localhost:8080/api/products/etag/2
+Accept: application/json
+If-None-Match: "-704902498"
