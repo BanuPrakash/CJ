@@ -10,6 +10,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -52,12 +56,27 @@ public class ProductController {
 
 
     @GetMapping("/etag/{pid}")
-    public ResponseEntity<Product> getProductByIdCache(@PathVariable("pid") int id) throws EntityNotFoundException {
+    public ResponseEntity<Product> getProductByIdEhCache(@PathVariable("pid") int id) throws EntityNotFoundException {
         Product product =  service.getProductById(id);
         return ResponseEntity.ok().eTag(String.valueOf(product.hashCode())).body(product);
     }
 
 
+    // SPeL
+    @Cacheable(value="productCache", key="#id")
+    // @Cacheable(value="productCache", key="#id", unless = "#result !=null")
+    @GetMapping("/cache/{pid}")
+    public Product getProductByIdCache(@PathVariable("pid") int id) throws EntityNotFoundException {
+        System.out.println("Cache Miss...");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return  service.getProductById(id);
+    }
+
+    @Cacheable(value = "productCache", key = "#p.id", condition = "#p.price > 100")
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED) // 201
     public Product addProduct(@RequestBody @Valid Product p) {
@@ -65,6 +84,7 @@ public class ProductController {
     }
 
     // PATCH http://localhost:8080/api/products/1?price=75000.90
+    @CachePut(value = "productCache", key="#id")
     @PatchMapping("/{pid}")
     public Product updateProductPrice(@PathVariable("pid") int id, @RequestParam("price") double price) throws EntityNotFoundException {
         return service.updateProductPrice(id, price);
@@ -84,5 +104,13 @@ public class ProductController {
     @PutMapping("/{pid}")
     public Product modifyProduct(@PathVariable("pid") int id, @RequestBody Product p) {
         return null;
+    }
+
+    // Avoid cache evict using URI
+    @CacheEvict(value = "productCache", key="#id")
+    @DeleteMapping("/{pid}")
+    public String deleteProduct(@PathVariable("pid") int id) {
+        System.out.println("Delete code");
+        return "Deleted!!!";
     }
 }

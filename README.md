@@ -1191,5 +1191,33 @@ User 2:
 Last commit gets StaleStateException, last user has to refresh / reload then do tx once again
 ```
 
-Resume @ 11:15
+Spring Boot level Caching:
+ConcurrentMapCache is available by default
+
+
+```
+    <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+    </dependency>
+
+    @Configuration
+    @EnableCaching
+    public class AppConfig {
+        
+    }
+
+     @Cacheable(value="productCache", key="#id")
+     public Product getProductByIdCache(@PathVariable("pid") int id)
+
+     Key in cache will be ID, returned value will be the value in Cache.
+
+@EnableCaching --> enable the cache
+@Cacheable --> for caching
+@CachePut --> update the cache
+@CacheEvict --> remove from cache
+
+https://spring.io/blog/2020/11/10/new-in-spring-5-3-improved-cron-expressions
+
+```
 
