@@ -1308,3 +1308,21 @@ http://localhost:8080/customers/
 No @RestController instead use @BasePathAwareController
 
 
+============
+
+Consume REST endpoints:
+* RestTemplate
+* WebClient
+* RestClient
+
+===================
+
+Spring Boot non blocking operations / Async 
+Any @configuration file -- @EnableAsync
+
+* Using Events --> Listeners
+
+
+
+
+

@@ -17,11 +17,11 @@ public class ProductController {
     @Autowired
     private ProductRepo productRepo;
 
-    @RequestMapping(path = "products" , method = RequestMethod.GET)
-    public  @ResponseBody List<Product> get() {
-        List<Product> products = productRepo.findAll();
-        // add explcility links using WebMvcLinkBuilder
-        return Arrays.asList(new Product(42, "A", 3523.22, 100,0),
-                new Product(72, "B", 5211.22,100,1));
-    }
+//    @RequestMapping(path = "products" , method = RequestMethod.GET)
+//    public  @ResponseBody List<Product> get() {
+//        List<Product> products = productRepo.findAll();
+//        // add explcility links using WebMvcLinkBuilder
+//        return Arrays.asList(new Product(42, "A", 3523.22, 100,0),
+//                new Product(72, "B", 5211.22,100,1));
+//    }
 }

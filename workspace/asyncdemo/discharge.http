@@ -1,0 +1,4 @@
+### @name ="Discharge  Patient"
+
+GET http://localhost:8080/api/discharge?id=35&name=Roger
+Accept: text/plain
