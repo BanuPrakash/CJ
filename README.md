@@ -1376,3 +1376,32 @@ Using generated security password: 50999929-6690-4fad-bd10-43cb6a79a536
 
 ```
 
+RESTful --> Stateless
+Client has to pass the client's info, server doesn't have it.
+
+Tokens --> JWT
+
+```
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30
+
+HEADER:
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+
+PAYLOAD:
+{
+    "sub": "harry@cisco.com",
+    "iat": 353424521414,
+    "exp": 362314145151,
+    "iss": "https://security.cisco.com",
+    "authorities": "ADMIN", "MANAGER"
+}
+
+JWS signature:
+HMACSHA256(
+      base64UrlEncode(header) + "." +
+      base64UrlEncode(payload),
+      topsecretsaltvaluetobeused)
+```

@@ -30,7 +30,7 @@ import static java.security.KeyRep.Type.SECRET;
 public class JwtService {
     @Value("${jwt.secret}")
     private String jwtSigningKey;
-
+    // login --> database UserDetails is fetched based on email
     public String generateToken(UserDetails userDetails) {
         return generateToken(new HashMap<>(), userDetails);
     }
@@ -49,7 +49,7 @@ public class JwtService {
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 *24))
                 .claim("authorities", authorities)
                 .claim("roles", authorities)
-                .claim("iss", "https://authserver.adobe.com")
+                .claim("iss", "https://authserver.cisco.com")
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256).compact();
     }
 

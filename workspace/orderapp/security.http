@@ -1,0 +1,54 @@
+### @name ="Register User"
+
+POST http://localhost:8080/auth/register
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "peter@cisco.com",
+  "password": "secret",
+  "username": "Peter",
+  "roles": [ {
+    "name": "ROLE_USER",
+    "description": "Has basic rights"
+  }]
+}
+
+### @name ="Register Admin"
+
+POST http://localhost:8080/auth/register
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "anne@cisco.com",
+  "password": "secret",
+  "username": "Anne",
+  "roles": [ {
+  "name": "ROLE_USER",
+  "description": "Has basic rights"
+},
+    {
+      "name": "ROLE_ADMIN",
+      "description": "Admin rights"
+    }]
+}
+
+
+### @name ="Admin Login"
+
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "anne@cisco.com",
+  "password": "secret"
+}
+
+
+### @name="access Protected Resource"
+
+GET http://localhost:8080/api/products
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbm5lQGNpc2NvLmNvbSIsImlhdCI6MTc1MjgyMTg1OCwiZXhwIjoxNzUyODIzMjk4LCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiLCJST0xFX0FETUlOIl0sInJvbGVzIjpbIlJPTEVfVVNFUiIsIlJPTEVfQURNSU4iXSwiaXNzIjoiaHR0cHM6Ly9hdXRoc2VydmVyLmNpc2NvLmNvbSJ9.bXNikO2_Bn0jkhF2XDcNOCcIeDY0HpaKhNib7zYK27k
