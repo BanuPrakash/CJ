@@ -1323,6 +1323,35 @@ Any @configuration file -- @EnableAsync
 * Using Events --> Listeners
 
 
+======
+
+Day 5: 
+
+Async aggregations and Security
 
 
+https://jsonplaceholder.typicode.com/users
+https://jsonplaceholder.typicode.com/posts
 
+RestClient with HttpExchange
+HttpExchange:
+A declarative HTTP interface is a Java interface that helps reduce the boilerplate code, generates a proxy implementing this interface, and performs the exchanges at the framework level.
+
+```
+
+interface BooksService {
+
+    @GetExchange("/books")
+    List<Book> getBooks();
+
+    @GetExchange("/books/{id}")
+    Book getBook(@PathVariable long id);
+
+    @PostExchange("/books")
+    Book saveBook(@RequestBody Book book);
+
+    @DeleteExchange("/books/{id}")
+    ResponseEntity<Void> deleteBook(@PathVariable long id);
+}
+
+```
