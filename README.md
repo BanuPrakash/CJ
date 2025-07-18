@@ -1355,3 +1355,23 @@ interface BooksService {
 }
 
 ```
+
+Spring Security: Authentication and Authorization
+
+```
+ <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+By adding above dependency:
+1) All resources become protected
+2) login and logout
+http://localhost:8080/login
+http://localhost:8080/logout
+
+3) created one user with username="user" and generated password
+
+Using generated security password: 50999929-6690-4fad-bd10-43cb6a79a536
+
+```
